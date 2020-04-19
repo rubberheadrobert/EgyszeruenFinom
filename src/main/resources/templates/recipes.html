@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Egyszerű receptek mindenki számára</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="css/index-style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light stick-top">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand"><img id="navbar-img"src="img/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+            <ul th:if="${#authorization.expression('isAuthenticated()')}" class="navbar-nav ml-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Főlap</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/recipes}">Receptek</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Kijelentkezés</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/edit-recipes}">Recept Műveletek</a>
+                </li>
+            </ul>
+
+            <ul th:unless="${#authorization.expression('isAuthenticated()')}" class="navbar-nav ml-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Főlap</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/recipes}">Receptek</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Bejelentkezés</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<!--- Jumbotron -->
+<div class="container-fluid">
+    <div class="row jumbotron">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+            <p class="lead">Jelenleg fejlesztés alatt van a honlapunk. Még több
+                recepttel bővítjük majd weboldalunkat!</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">
+                Egyszerű Mindenkinek!
+            </h1>
+        </div>
+        <div class="col-12">
+            <p class="lead">
+                Recepteinket még az is el tudja készíteni, aki nem tudja megkülönböztetni a villát a kanáltól!
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row padding">
+        <div th:each="recipe : ${recipeList}" class="col-md-6 col-lg-3">
+            <div class="card">
+                <img th:src="@{${recipe.image}}" class="card-img-top">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${recipe.name}">Recipe Name</h4>
+                    <p class="card-text" th:text="${recipe.description}">Recipe Description</p>
+                    <a href="#" th:href="@{'/recipe/' + ${recipe.id}}" class="btn btn-outline-secondary">Recept Megtekíntése</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<hr class="my-4">
+
+<!--- Footer -->
+<footer>
+    <div class="container-fluid padding">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <hr class="light-100">
+                <h5>&copy; egyszerureceptek</h5>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</body>
+</html>

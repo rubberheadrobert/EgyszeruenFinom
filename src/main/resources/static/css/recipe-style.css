@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+html, body {
+  height:100%;
+  width: 100%
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+#navbar-img{
+  width: 200px;
+  height: 70px;
+}
+
+.navbar{
+  padding: .8rem;
+}
+
+.navbar-nav li{
+  padding-right:20px;
+}
+.nav-link{
+  font-size: 1.1em !important;
+}
+
+.btn-primary{
+  background-color: orange;
+  border: 1px solid orange;
+}
+
+.btn-primary:hover{
+  background-color: darkorange;
+  border: 1px solid darkorange;
+}
+
+.jumbotron{
+  padding: 1rem;
+  border-radius: 0;
+}
+
+.padding{
+  padding-bottom: 2rem;
+}
+
+form{
+
+}
+
+.welcome{
+  width: 75%;
+  margin: 0 auto;
+  padding-top:2rem;
+}
+
+.welcome hr{
+  border-top:2px solid #b4b4b4;
+  width: 95%;
+  margin-top: .3rem;
+  margin-bottom: 1rem;
+}
+
+.welcome img{
+    width: 80%;
+    height: 80%;
+}
+
+footer{
+  background-color: #3f3f3f;
+  color: #d5d5d5;
+  padding-top: 2rem;
+}
+
+hr.light{
+  border-top: 1px solid #d5d5d5;
+  width: 75%;
+  margin-top: .8rem;
+  margin-bottom: 1rem;
+}
+
+footer a{
+  color: #d5d5d5;
+}
+
+hr.light-100{
+  border-top: 1px solid #d5d5d5;
+  width: 100%;
+  margin-top: .8rem;
+  margin-bottom: 1rem;
+}
+
+figure {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  margin: 0!important;
+}
+
+/*--- Bootstrap Padding Fix --*/
+[class*="col-"] {
+    padding: 1rem;
+}

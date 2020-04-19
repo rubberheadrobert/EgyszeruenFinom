@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Egyszerű receptek mindenki számára</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="../css/recipe-style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light stick-top">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand"><img id="navbar-img"src="../img/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+            <ul th:if="${#authorization.expression('isAuthenticated()')}" class="navbar-nav ml-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Főlap</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/recipes}">Receptek</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Kijelentkezés</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/edit-recipes}">Recept Műveletek</a>
+                </li>
+            </ul>
+
+            <div th:unless="${#authorization.expression('isAuthenticated()')}">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Főlap</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/recipes}">Receptek</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">Bejelentkezés</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--- Jumbotron -->
+<div class="container-fluid">
+    <div class="row jumbotron">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+            <p class="lead">Jelenleg fejlesztés alatt van a honlapunk. Receptek kibővítésükkel és még több
+                recepttel bővítjük majd weboldalunkat!</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-5">
+            <h1>Add New Recipe</h1>
+            <form action="/upload-edited" method="post" th:object="${recipe}" enctype="multipart/form-data"
+                  class="main-form needs-validation" novalidate>
+                <table>
+                    <tr>
+                        <td>Product ID: </td>
+                        <td><input type="text" th:field="*{id}" readonly="readonly" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Product Name: </td>
+                        <td><input type="text" th:field="*{name}" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Description: </td>
+                        <td><input type="text" th:field="*{description}" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Image: </td>
+                        <td><input type="text" th:field="*{image}" class="form-control" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Chef: </td>
+                        <td><input type="text" th:field="*{chefname}"
+                                   class="form-control" readonly="readonly"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Save</button></td>
+                    </tr>
+
+                </table>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let form = document.querySelector('.needs-validation');
+
+    form.addEventListener('submit',function(event){
+    if(form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    form.classList.add('was-validated')
+    })
+</script>
+
+<hr class="my-4">
+
+<!--- Footer -->
+<footer>
+    <div class="container-fluid padding">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <hr class="light-100">
+                <h5>&copy; egyszerureceptek</h5>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</body>
+</html>

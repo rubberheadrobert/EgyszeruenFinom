@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Egyszerű receptek mindenki számára</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="css/index-style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light stick-top">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand"><img id="navbar-img"src="img/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+            <ul th:if="${#authorization.expression('isAuthenticated()')}" class="navbar-nav ml-auto">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Főlap</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/recipes}">Receptek</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Kijelentkezés</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/edit-recipes}">Recept Műveletek</a>
+                    </li>
+            </ul>
+            <ul th:unless="${#authorization.expression('isAuthenticated()')}" class="navbar-nav ml-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Főlap</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/recipes}">Receptek</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Bejelentkezés</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div id="slides" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="img/pizza.jpg" alt="">
+            <div class="carousel-caption">
+                <h2>Egyszerű Receptek</h2>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="img/fried-chicken.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="img/spaghetti.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row jumbotron">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+            <p class="lead">Jelenleg fejlesztés alatt van a honlapunk. Még több
+                recepttel bővítjük majd weboldalunkat!</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">
+                Egyszerű Mindenkinek!
+            </h1>
+        </div>
+        <div class="col-12">
+            <p class="lead">
+                Weboldalunk azzal a céllal jött létre, hogy segítsünk azoknak az embereknek, akik főznének, de nem akarnak egész nap a konyhában lenni. Magadra ismersz?
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid padding">
+    <div class="row text-center padding img-icon">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <img src="img/salad-icon.png">
+            <h3>Előételek</h3>
+            <p>Előételek, amiket akár pár perc alatt el lehet készíteni.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <img src="img/pizza-icon.png">
+            <h3>Főételek</h3>
+            <p>Főételeinket érdemes elkészíteni, főleg ha valami egyszerűen finomra vágysz! </p>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <img src="img/dessert-icon.png">
+            <h3>Desszertek</h3>
+            <p>Egy hosszú nap után mindenkinek jól esik egy desszert, még jobban is ha gyorsan kész van! </p>
+        </div>
+    </div>
+    <hr class="my-4">
+</div>
+
+<div class="container-fluid">
+    <div class="row padding">
+        <div class="col-lg-6">
+            <h2>De nincs időm főzni...</h2>
+            <p>Nincs ideje minden nap munka/egyetem/iskola után még több órát eltölteni a konyhában?</p>
+            <p>Nem gond! Weboldalunkon csakis a legegyszerűbb és leggyorsabban elkészíthető receptek találhatóak. Nézze meg őket most!</p>
+            <br>
+            <a th:href="@{/recipes}" class="btn btn-primary">Receptek</a>
+        </div>
+        <div class="col-lg-6">
+            <img src="img/desk.png" alt="" class="img-fluid">
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<figure>
+    <div class="fixed-wrap">
+        <div id="fixed">
+
+        </div>
+    </div>
+</figure>
+
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">
+                Kiemelt Recepteink
+            </h1>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row padding">
+        <div th:each="recipe : ${recipeList}" class="col-md-4">
+            <div class="card">
+                <img th:src="@{${recipe.image}}" class="card-img-top">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${recipe.name}">Recipe Name</h4>
+                    <p class="card-text" th:text="${recipe.description}">Recipe Description</p>
+                    <a href="#" class="btn btn-outline-secondary">Recept Megtekíntése</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<div class="container-fluid padding">
+    <div class="row text-center padding">
+        <div class="col-12">
+            <h2>Connect</h2>
+        </div>
+        <div class="col-12 social padding">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container-fluid padding">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <hr class="light-100">
+                <h5>&copy; egyszerureceptek</h5>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+</body>
+</html>
